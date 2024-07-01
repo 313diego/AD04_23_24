@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-ene-2024 11:27:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Medicamento" table="medicamento" catalog="farmacia" optimistic-lock="version">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="codigo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="proveedor" class="Modelo.Proveedor" fetch="select">
+            <column name="proveedor" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="precioActual" type="float">
+            <column name="precioActual" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="stock" type="int">
+            <column name="stock" not-null="true" />
+        </property>
+        <property name="descatalogado" type="java.lang.Boolean">
+            <column name="descatalogado" />
+        </property>
+        <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="medicamento" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Venta" />
+        </set>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="medicamento" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>

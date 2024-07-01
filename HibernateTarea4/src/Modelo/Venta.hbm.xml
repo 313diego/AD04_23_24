@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-ene-2024 11:27:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Venta" table="venta" catalog="farmacia" optimistic-lock="version">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="codigo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="medicamento" class="Modelo.Medicamento" fetch="select">
+            <column name="medicamento" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="unidades" type="int">
+            <column name="unidades" not-null="true" />
+        </property>
+        <property name="importeUnidad" type="float">
+            <column name="importeUnidad" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="importeTotal" type="float">
+            <column name="importeTotal" precision="12" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
